@@ -19,7 +19,7 @@ app.get("/usuario", verificaToken, (req, res) => {
         .limit(limite)
         .exec((err, usuarios) => {
             if (err) {
-                return res.status(400).json({
+                return res.status(500).json({
                     ok: false,
                     err
                 })
@@ -47,7 +47,7 @@ app.post("/usuario", [verificaToken, verificaAdminRole], function(req, res) {
 
     usuario.save((err, usuarioDB) => {
         if (err) {
-            return res.status(400).json({
+            return res.status(500).json({
                 ok: false,
                 err
             })
@@ -66,7 +66,7 @@ app.put("/usuario/:id", [verificaToken, verificaAdminRole], function(req, res) {
 
     Usuario.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, usuarioDB) => {
         if (err) {
-            return res.status(400).json({
+            return res.status(500).json({
                 ok: false,
                 err
             })
